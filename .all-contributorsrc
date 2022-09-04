@@ -269,6 +269,25 @@
         "test",
         "tool"
       ]
+    },
+    {
+      "login": "dorser",
+      "name": "dorser",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20969462?v=4",
+      "profile": "https://github.com/dorser",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "u3u",
+      "name": "さくら",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20062482?v=4",
+      "profile": "https://qwq.cat",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github",

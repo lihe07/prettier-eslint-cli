@@ -7,6 +7,7 @@ CLI for [`prettier-eslint`][prettier-eslint]
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npm-stat]
 [![MIT License][license-badge]][license]
+[![changesets](https://img.shields.io/badge/maintained%20with-changesets-176de3.svg?style=flat-square)](https://github.com/atlassian/changesets)
 
 [![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/prettier?style=flat-square)](https://opencollective.com/prettier)
 [![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors)
@@ -97,6 +98,8 @@ Options:
                                                        [boolean] [default: true]
   --list-different         Print filenames of files that are different from
                            Prettier + Eslint formatting.
+                                                      [boolean] [default: false]
+  --include-dot-files      Include files that start with a dot in the search.
                                                       [boolean] [default: false]
   --eslint-path            The path to the eslint module to use
                  [default: "./node_modules/eslint"]
@@ -281,6 +284,8 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/gwhitney"><img src="https://avatars.githubusercontent.com/u/3825429?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Glen Whitney</b></sub></a><br /><a href="#maintenance-gwhitney" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://campcode.dev/"><img src="https://avatars.githubusercontent.com/u/10620169?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rebecca Vest</b></sub></a><br /><a href="https://github.com/prettier/prettier-eslint-cli/commits?author=idahogurl" title="Code">💻</a></td>
     <td align="center"><a href="https://www.1stg.me/"><img src="https://avatars.githubusercontent.com/u/8336744?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JounQin</b></sub></a><br /><a href="#question-JounQin" title="Answering Questions">💬</a> <a href="https://github.com/prettier/prettier-eslint-cli/commits?author=JounQin" title="Code">💻</a> <a href="#design-JounQin" title="Design">🎨</a> <a href="https://github.com/prettier/prettier-eslint-cli/commits?author=JounQin" title="Documentation">📖</a> <a href="#ideas-JounQin" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-JounQin" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-JounQin" title="Maintenance">🚧</a> <a href="#plugin-JounQin" title="Plugin/utility libraries">🔌</a> <a href="#projectManagement-JounQin" title="Project Management">📆</a> <a href="https://github.com/prettier/prettier-eslint-cli/pulls?q=is%3Apr+reviewed-by%3AJounQin" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/prettier/prettier-eslint-cli/commits?author=JounQin" title="Tests">⚠️</a> <a href="#tool-JounQin" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://github.com/dorser"><img src="https://avatars2.githubusercontent.com/u/20969462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dorser</b></sub></a><br /><a href="https://github.com/prettier/prettier-eslint-cli/commits?author=dorser" title="Code">💻</a> <a href="#maintenance-dorser" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://qwq.cat"><img src="https://avatars2.githubusercontent.com/u/20062482?v=4?s=100" width="100px;" alt=""/><br /><sub><b>さくら</b></sub></a><br /><a href="https://github.com/prettier/prettier-eslint-cli/commits?author=u3u" title="Code">💻</a></td>
   </tr>
 </table>
 

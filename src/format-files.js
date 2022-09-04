@@ -54,6 +54,7 @@ function formatFilesFromArgv({
   prettierIgnore: applyPrettierIgnore = true,
   eslintConfigPath,
   prettierLast,
+  includeDotFiles,
   ...prettierOptions
 }) {
   logger.setLevel(logLevel);
@@ -71,7 +72,7 @@ function formatFilesFromArgv({
     };
   }
 
-  const cliOptions = { write, listDifferent };
+  const cliOptions = { write, listDifferent, includeDotFiles };
   if (stdin) {
     return formatStdin({ filePath: stdinFilepath, ...prettierESLintOptions });
   } else {
@@ -122,12 +123,14 @@ function formatFilesFromGlobs({
     from(fileGlobs)
       .pipe(
         mergeMap(
-          getFilesFromGlob.bind(
-            null,
-            ignoreGlobs,
-            applyEslintIgnore,
-            applyPrettierIgnore
-          ),
+          fileGlob =>
+            getFilesFromGlob(
+              ignoreGlobs,
+              applyEslintIgnore,
+              applyPrettierIgnore,
+              fileGlob,
+              cliOptions
+            ),
           null,
           concurrentGlobs
         ),
@@ -162,39 +165,41 @@ function formatFilesFromGlobs({
     }
 
     function onComplete() {
-      const isNotSilent = logger.getLevel() !== logger.levels.SILENT;
+      const isSilent = logger.getLevel() === logger.levels.SILENT || cliOptions.listDifferent;
 
       /* use console.error directly here because
        * - we don't want these messages prefixed
        * - we want them to go to stderr, not stdout
        */
-      if (successes.length && isNotSilent) {
-        console.error(
-          messages.success({
-            success: chalk.green('success'),
-            count: successes.length,
-            countString: chalk.bold(successes.length)
-          })
-        );
-      }
-      if (failures.length && isNotSilent) {
-        process.exitCode = 1;
-        console.error(
-          messages.failure({
-            failure: chalk.red('failure'),
-            count: failures.length,
-            countString: chalk.bold(failures.length)
-          })
-        );
-      }
-      if (unchanged.length && isNotSilent) {
-        console.error(
-          messages.unchanged({
-            unchanged: chalk.gray('unchanged'),
-            count: unchanged.length,
-            countString: chalk.bold(unchanged.length)
-          })
-        );
+      if (!isSilent) {
+        if (successes.length) {
+          console.error(
+            messages.success({
+              success: chalk.green('success'),
+              count: successes.length,
+              countString: chalk.bold(successes.length)
+            })
+          );
+        }
+        if (failures.length) {
+          process.exitCode = 1;
+          console.error(
+            messages.failure({
+              failure: chalk.red('failure'),
+              count: failures.length,
+              countString: chalk.bold(failures.length)
+            })
+          );
+        }
+        if (unchanged.length) {
+          console.error(
+            messages.unchanged({
+              unchanged: chalk.gray('unchanged'),
+              count: unchanged.length,
+              countString: chalk.bold(unchanged.length)
+            })
+          );
+        }
       }
       resolve({ successes, failures });
     }
@@ -205,9 +210,10 @@ function getFilesFromGlob(
   ignoreGlobs,
   applyEslintIgnore,
   applyPrettierIgnore,
-  fileGlob
+  fileGlob,
+  cliOptions
 ) {
-  const globOptions = { ignore: ignoreGlobs };
+  const globOptions = { dot: cliOptions.includeDotFiles, ignore: ignoreGlobs };
   if (!fileGlob.includes('node_modules')) {
     // basically, we're going to protect you from doing something
     // not smart unless you explicitly include it in your glob
